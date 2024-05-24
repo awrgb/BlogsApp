@@ -18,7 +18,7 @@ const BlogDetails = ({ blog, slug: blogSlug }) => {
       <time className="m-3">
         {getCurrentDate()}
       </time>
-            <div className="m-3">{blog.readingTime.text}</div>
+            <div className="m-3">{blog.readingTime.text}</div> 
       <Link href={`/categories/${slug(blog.tags[0])}`} className="m-3">
         #{blog.tags[0]}
       </Link>

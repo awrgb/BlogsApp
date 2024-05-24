@@ -6,6 +6,16 @@ import Link from "next/link";
 import siteMetadata from "@/src/utils/siteMetaData";
 
 const Footer = () => {
+
+    function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 since getMonth() returns zero-based month index
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+
   const {
     register,
     handleSubmit,
@@ -81,7 +91,7 @@ const Footer = () => {
 
       <div className="w-full  mt-16 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex  flex-col md:flex-row items-center justify-between">
         <span className="text-center">
-          &copy;2024 ANYBLOGS. All rights reserved.
+          &copy; {getCurrentDate} ANYBLOGS. All rights reserved.
         </span>
         <Link
           href="/sitemap.xml"
