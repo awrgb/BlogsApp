@@ -4,6 +4,14 @@ import Link from "next/link";
 import React from "react";
 
 const BlogLayoutTwo = ({ blog }) => {
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 since getMonth() returns zero-based month index
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
   return (
     <div className="group grid grid-cols-12 gap-4 items-center text-dark dark:text-light">
       <Link
@@ -38,7 +46,7 @@ const BlogLayoutTwo = ({ blog }) => {
         </Link>
 
         <span className="inline-block w-full capitalize text-gray dark:text-light/50 font-semibold  text-xs sm:text-base">
-          {format(new Date(blog.publishedAt), "MMMM dd, yyyy")}
+          {getCurrentDate()}
         </span>
       </div>
     </div>

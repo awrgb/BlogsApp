@@ -4,6 +4,14 @@ import Link from "next/link";
 import React from "react";
 
 const BlogLayoutThree = ({ blog }) => {
+  function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0'); // Adding 1 since getMonth() returns zero-based month index
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
   return (
     <div className="group flex flex-col items-center text-dark dark:text-light">
       <Link href={blog.url} className="h-full rounded-xl overflow-hidden">
@@ -37,7 +45,7 @@ const BlogLayoutThree = ({ blog }) => {
         </Link>
 
         <span className="capitalize text-gray dark:text-light/50 font-semibold text-sm  sm:text-base">
-          {format(new Date(blog.publishedAt), "MMMM dd, yyyy")}
+              {getCurrentDate()}
         </span>
       </div>
     </div>
