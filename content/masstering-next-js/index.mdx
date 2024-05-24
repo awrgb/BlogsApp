@@ -32,3 +32,45 @@ Next.js simplifies the process of building a web application for production by p
 5. Styling
 6. Optimization — Images, forms, and scripts
 7. Dev and Prod build system
+
+## Some of the key features and concepts of Next.js include:
+1. Server-Side Rendering (SSR): Next.js enables server-side rendering, which means that pages can be pre-rendered on the server and sent as fully formed HTML to the client, improving performance and SEO.
+2. Static Site Generation (SSG): Next.js supports static site generation, allowing you to pre-render entire pages at build time. This results in extremely fast loading times and is great for content that doesn’t change frequently.
+3. API Routes: You can create API endpoints within your Next.js application, allowing you to build both the frontend and backend within the same codebase.
+4. Automatic Code Splitting: Next.js automatically splits your JavaScript code into smaller, optimized bundles. This improves performance by reducing the amount of code that needs to be loaded on the initial page load.
+5. Image Optimization: It includes built-in support for optimizing and serving images efficiently, helping to improve performance and user experience.
+6. File-based Routing: Routing is simple and intuitive in Next.js, as it follows a file-based approach. Creating files in the pages directory automatically generates routes for your application.
+
+## Create first Next.js App
+> To create a new Next.js project, you can use the following command, replacing <project-name> with the name of your project:
+
+
+```
+ npx create-next-app@latest <app-name>
+
+ ```
+
+> The create-next-app command will prompt you to configure your project. You can choose whether to use TypeScript, ESLint, or Tailwind CSS. Follow the prompts and select the options that suit your project requirements.
+
+``` 
+What is your project named? my-app
+Would you like to use TypeScript? No / Yes
+Would you like to use ESLint? No / Yes
+Would you like to use Tailwind CSS? No / Yes
+Would you like to use `src/` directory? No / Yes
+Would you like to use App Router? (recommended) No / Yes
+Would you like to customize the default import alias (@/*)? No / Yes
+What import alias would you like configured? @/*
+      ```
+
+
+> To start the development server and see your new Next.js application in action, run the following command:
+
+```
+ npm run dev
+
+ ```
+
+## Routing
+Next.js introduced a new App Router built on React Server Components. It has a file-system-based routing mechanism. Files and folders in your codebase define URL paths the user can access in the browser. A special page.js file is used to make route segments publicly accessible.
+
