@@ -83,9 +83,15 @@ const Footer = () => {
         <span className="text-center">
           &copy;2024 ANYBLOGS. All rights reserved.
         </span>
+        <Link
+          href="/sitemap.xml"
+          className="text-center underline my-4 md:my-0"
+        >
+          sitemap.xml
+        </Link>
         <div className="text-center">
           Made with &hearts; by{" "}
-          <a className="underline" target="_blank">
+          <a href="" className="underline" target="_blank">
             ANYBLOGS
           </a>
         </div>
