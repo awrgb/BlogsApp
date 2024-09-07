@@ -1,0 +1,214 @@
+---
+title: "Prototyping & Google Colab & Ollama Install"
+description: "Prototyping & Google Colab & Ollama Install"
+image: "../../public/blogs/proto.jpg"
+publishedAt: "2024-09-07"
+updatedAt: "2024-09-07"
+author: "codebucks"
+isPublished: true
+tags:
+- Generative AI,
+- Google Colab,
+- Ollama Install,
+---
+
+
+
+Until now, installing Ollama on Google Colab and prototyping with it has been a tedious task that required a lot of complex setup and configuration.
+
+By default, Google Colab provides a powerful environment for running Python code, but setting up additional tools and libraries like Ollama can be surprising and unintuitive.
+
+We get lots of questions about it actually, with people regularly asking us things like:
+
+> Why is it so difficult to install Ollama on Google Colab? How do I set it up correctly? What do you mean I need to configure additional settings?
+
+> We hear you, and we're here to help you get started with Ollama on Google Colab without any of the headaches.
+
+The following steps will guide you through the process of installing Ollama on Google Colab and getting started with your prototyping projects.
+
+1. First, open a new notebook in Google Colab.
+2. Next, run the following command to install Ollama:
+
+
+## What is Prototyping, What is Google Colab, and What is Ollama?
+
+   > Prototyping is the process of creating an early model or sample of a product to test and validate ideas before full-scale production. It allows designers and developers to explore concepts, identify potential issues, and gather feedback from users.
+
+   > Google Colab, short for Colaboratory, is a free cloud-based platform provided by Google that allows users to write and execute Python code in a Jupyter notebook environment. It is widely used for machine learning, data analysis, and educational purposes due to its ease of use and powerful computational resources.
+
+   > Ollama is a tool or library that can be integrated into Google Colab to enhance its functionality. It provides additional features and capabilities that are not available by default, making it easier to perform specific tasks or workflows within the Colab environment.
+
+
+
+
+For more info and link is : https://github.com/panaversity/learn-applied-generative-ai-fundamentals/tree/main/20_prototype_to_production and , https://github.com/panaversity/learn-applied-generative-ai-fundamentals/tree/main/20_prototype_to_production/00_prototyping
+
+---
+
+# Generative API Prototyping Stack
+## Introduction
+As generative AI becomes more popular, having an effective way to quickly build and test these applications is crucial. Our proposed Generative API Prototyping Stack provides developers with essential tools to build, test, and improve AI-driven solutions efficiently. The stack includes tools like Jupyter Notebook, Google Colab, Langchain, Google Gemini 1.5 Flash, Ollama, Llama 3.1 (8B), ngrok, and pyngrok to create a smooth environment for rapid prototyping.
+
+## Components of the Prototyping Stack
+### Jupyter Notebook
+
+ > Purpose: An interactive development environment where you can write and run code, visualize data, and document your work all in one place.
+ > Use: Ideal for prototyping, testing code snippets, and documenting your AI projects.
+### Google Colab
+ > Purpose: A cloud-based platform that provides free access to GPUs/TPUs, essential for training and running large models.
+ > Use: Great for working on large AI models without needing local hardware. It integrates well with Google Drive for easy collaboration.
+### Langchain
+
+ > Purpose: A framework that simplifies building language model-based applications by chaining together different AI models and prompts.
+ > Use: Helps in experimenting with different models and workflows without dealing with complex APIs directly.
+### Google Gemini 1.5 Flash
+
+ > Purpose: Provides advanced generative AI capabilities like text generation and translation.
+ > Use: Useful for integrating Google’s high-performance AI into your projects. It’s free, which is a significant advantage.
+### Ollama and Llama 3.1 (8B)
+
+ > Purpose: Ollama offers a simple interface for interacting with LLMs, while Llama 3.1 (8B) is a free, open-source model.
+ > Use: Ideal for generating language-based outputs locally without incurring costs.
+### Ngrok and pyngrok
+
+ > Purpose: Tools for exposing local servers to the internet securely.
+ > Use: Useful for testing and sharing your AI prototypes quickly, especially for live demos or webhooks.
+### Benefits of the Stack
+#### Cost-Effective:
+Utilizes free tools like Google Gemini 1.5 Flash and Llama 3.1, along with Google Colab, to minimize expenses.
+#### Scalable:
+Supports scaling from local tests to cloud implementations using tools like Langchain and Gemini 1.5.
+#### Collaborative:
+Facilitates teamwork with Google Colab’s sharing features and Jupyter Notebook’s documentation capabilities.
+#### Flexible:
+Offers various APIs and frameworks for experimenting with different models and approaches.
+#### Quick Deployment:
+Easily exposes local environments with ngrok and pyngrok for faster testing and development.
+Evaluation Metrics
+#### BLEU, ROUGE, METEOR:
+Metrics for evaluating text quality, covering precision, recall, and overall alignment of generated text.
+#### NLTK:
+A toolkit for natural language processing, essential for text preprocessing and handling.
+#### ROUGE Calculator:
+Measures the quality of generated text compared to reference texts, useful for tasks like summarization and translation.
+Additional Tools to Consider
+#### Hugging Face Transformers:
+Access a wide range of pre-trained models for various tasks.
+#### Weights & Biases (W&B):
+For tracking experiments, managing performance, and visualizing training.
+#### Streamlit or Gradio:
+Create interactive web apps for easy user interaction with AI models.
+#### FastAPI:
+Build and deploy REST APIs for your AI models quickly.
+#### SQLModel or Pandas:
+Manage and analyze large datasets effectively.
+#### Docker:
+Containerize your stack to ensure portability and consistent environments.
+#### Testcontainers:
+Automate testing with temporary Docker containers for various services.
+#### VSCode DevContainers:
+Define consistent development environments using Docker.
+#### DVC (Data Version Control):
+Manage and version large datasets used in training.
+Local Development and Cloud Deployment Stacks
+## Local Development Stack
+
+### VSCode:
+A versatile code editor with support for Python, Docker, and version control.
+### Docker Compose:
+Manages multi-container applications locally, mimicking production setups.
+### Dev Containers:
+Ensures a consistent development environment by using Docker containers.
+## Cloud Deployment Stack
+
+### Kubernetes:
+Automates the deployment, scaling, and management of containerized applications.
+### Azure Container Apps:
+A managed serverless container service for easy deployment and scaling.
+### GitHub Actions:
+Automates the build, test, and deployment processes.
+## Conclusion
+ > Our Generative API Prototyping Stack provides a comprehensive set of tools for building, testing, and deploying generative AI applications. By combining these tools, you can create, evaluate, and scale your AI solutions effectively. Adding more tools like Hugging Face Transformers and FastAPI can further enhance the stack’s capabilities. For local development and cloud deployment, using VSCode, Docker, Kubernetes, and Azure ensures a smooth and efficient workflow from prototype to production.
+
+
+# Steps to Install and Run Ollama LLM
+## Step 1: Install Terminal in Google Colab
+First, you need to install a terminal in your Google Colab environment. Run this command:
+
+```python
+!pip install colab-xterm
+```
+This will install a terminal extension for Colab. You should see a message saying that the installation was successful.
+
+## Step 2: Open the Terminal
+Next, open the terminal by running:
+
+``` python
+%load_ext colabxterm
+```
+```python
+%xterm
+```
+This will launch a terminal window where you can run commands.
+
+## Step 3: Install Ollama
+In the terminal window, run the following command to install Ollama:
+
+```python
+curl -fsSL https://ollama.com/install.sh | sh
+```
+This command downloads and installs Ollama.
+
+## Step 4: Download and Run the LLM Model
+Once Ollama is installed, you need to download and start the LLM model. Run these commands in the terminal:
+
+
+```python
+ollama serve & ollama run llama3.1
+```
+The first command starts the Ollama server in the background, and the second command runs the Llama 3.1 model.
+
+## Step 5: Test the Ollama Model
+You can now test the model using Python. Here’s a simple script to interact with the model:
+```python
+import requests
+
+ollama_url = "http://127.0.0.1:11434"
+
+def query_ollama(prompt, model="llama3.1"):
+    data = {
+        "prompt": prompt,
+        "model": model,
+        "stream": False
+    }
+    response = requests.post(f"{ollama_url}/api/generate", json=data)
+    if response.status_code == 200:
+        return response.json().get("response", "No response Found")
+    else:
+        return f"Error: {response.status_code}, {response.text}"
+```
+## Example Queries
+```python
+response = query_ollama("Greet me in 3 words!")
+print(response)
+```
+
+```python
+prompt = "Write me a poem about 5 sentences about Prophet Muhammad SAW"
+result = query_ollama(prompt)
+print(result)
+```
+
+```python
+prompt = "Give me FastAPI hello world code"
+result = query_ollama(prompt)
+print(result)
+query_ollama(prompt, model="llama3.1"): Sends a prompt to the Ollama API and returns the generated text.
+Example 1: query_ollama("Greet me in 3 words!") might return "Hello, how are you?"
+Example 2: query_ollama(prompt) with a poem prompt will return a short poem.
+Example 3: query_ollama(prompt) with a FastAPI code prompt will provide a sample FastAPI "Hello World" code.
+FastAPI "Hello World" Example
+Here's the sample FastAPI code:
+```
+
+Thanks for reading
