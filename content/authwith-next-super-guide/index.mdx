@@ -1,0 +1,205 @@
+---
+title: "Ultimate Guide on Next Auth"
+description: How to Authenticate in Nextjs
+image: "../../public/blogs/next-authentication.png"
+publishedAt: "2024-9-9"
+updatedAt: "2024-9-9"
+author: "codebucks"
+isPublished: true
+tags: 
+- nextjs
+- web-development
+- next-auth
+---
+# What is Next-Auth ? 
+NextAuth.js is a popular authentication library for Next.js that simplifies the process of adding user authentication to your app. It handles everything from user sign-in to session management and supports various authentication providers like Google, GitHub, Facebook, and more. In simple terms, it allows users to securely log in to your app without needing to build the entire authentication flow from scratch.
+
+# Common Methods for Authentication in Next.js:
+## OAuth Providers:
+   > NextAuth allows easy integration with providers like Google, GitHub, and Facebook. You can quickly set up login with these services without manually handling tokens and user data.
+
+## Email Sign-In:
+   > NextAuth supports email-based authentication, where a user can sign in with a magic link sent to their email address.
+
+## Credentials Provider:
+   > You can use your own custom credentials like username/password or API tokens. This gives you more control over the authentication process, which can be useful in certain applications.
+
+## JWT (JSON Web Tokens):
+   > NextAuth uses JWTs to manage sessions. Tokens are securely stored and used to verify user identity without storing sensitive data in the session.
+
+# Unique Techniques for Advanced Authentication:
+
+Here are a few techniques that even experienced programmers might not commonly consider or know about:
+
+## Anonymous or Pseudonymous Authentication:
+
+ > Allow users to authenticate without exposing their real identity. This technique involves creating temporary user sessions, useful in applications like surveys or anonymous feedback systems.
+## Blockchain Authentication:
+
+> Using decentralized identity systems like Ethereum’s wallet-based login (e.g., MetaMask) allows users to authenticate via blockchain. This technique doesn’t rely on traditional databases but uses cryptographic keys to verify identity.
+## Time-Limited Auth:
+
+> Create authentication methods that allow users temporary access based on a time limit. After the time expires, they are logged out automatically. Useful for trial or limited access features.
+## Biometric Authentication with WebAuthn:
+
+> Implement biometric authentication using WebAuthn, allowing users to log in using fingerprint, face recognition, or device-based security features. This requires browser support but adds an additional security layer.
+Progressive Authentication:
+
+> Rather than requiring full login immediately, some applications use progressive authentication where the user is only asked for more information or a stronger authentication step (like 2FA) when performing higher-risk actions.
+One-Time Password (OTP) Auth with Custom Algorithms:
+
+Generate custom one-time passwords (OTPs) using cryptographic algorithms to offer secure login without requiring third-party services.
+Context-Aware Authentication:
+
+Implement context-based authentication where factors like the user’s location, device, or time of day are analyzed before granting access. This helps reduce fraudulent logins and provides more dynamic security.
+API-based Role Escalation:
+
+Users start with limited access roles, and upon performing specific actions or validation steps, their role or access level is escalated automatically via APIs.
+These techniques provide flexibility and enhanced security in user authentication systems, offering creative ways to handle login flows and user identity.
+
+# Add Authenntication in Nextjs
+To add authentication in a Next.js project using NextAuth.js, follow these steps:
+
+## Step 1: Install NextAuth.js
+First, install the required packages for NextAuth.js:
+```javascript
+npm install next-auth
+# or
+yarn add next-auth
+```
+## Step 2: Create API Route for Authentication
+NextAuth needs an API route to handle authentication requests. In your Next.js project, create a file for the authentication handler:
+
+1. Inside the pages/api/auth directory, create a file called [...nextauth].ts (or .js if you're not using TypeScript):
+```javascript
+mkdir -p pages/api/auth
+touch pages/api/auth/[...nextauth].ts
+```
+2. Add the following code to handle the authentication:
+```javascript
+//  /app/api/auth/[...nextauth]/route.ts
+import NextAuth from 'next-auth'
+import AppleProvider from 'next-auth/providers/apple'
+import FacebookProvider from 'next-auth/providers/facebook'
+import GoogleProvider from 'next-auth/providers/google'
+import EmailProvider from 'next-auth/providers/email'
+
+export default NextAuth({
+  providers: [
+    // OAuth authentication providers...
+    AppleProvider({
+      clientId: process.env.APPLE_ID,
+      clientSecret: process.env.APPLE_SECRET
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_ID,
+      clientSecret: process.env.FACEBOOK_SECRET
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET
+    }),
+    // Passwordless / email sign in
+    EmailProvider({
+      server: process.env.MAIL_SERVER,
+      from: 'NextAuth.js <no-reply@example.com>'
+    }),
+  ]
+})
+```
+3. Add Environment Variables
+NextAuth requires environment variables for the authentication provider (e.g., Google). Add these to your .env.local file:
+```javascript
+# .env.local
+GOOGLE_CLIENT_ID=<your-google-client-id>
+GOOGLE_CLIENT_SECRET=<your-google-client-secret>
+
+# Required for NextAuth.js to work
+NEXTAUTH_URL=http://localhost:3000  # Update if deploying
+```
+Make sure to get the Client ID and Client Secret from Google by creating an OAuth 2.0 application in the Google Cloud Console.
+4. Add Authentication UI Components
+  ```javascript
+// ./components/SessionProviders
+import { SessionProvider } from "next-auth/react"
+
+export default function SessionProviders({
+  Component, pageProps: { session, ...pageProps }
+}) {
+  return (
+    <SessionProvider session={session}>
+      <Component {...pageProps}/>
+    </SessionProvider>
+  )
+}
+```
+Make sure that the module and component name is not same
+5. Add Session Provider into layout.tsx
+```javascript
+// app/layout.tsx
+import type { Metadata } from "next";
+import SessionProviders from '@/components/SessionProviders'
+import localFont from "next/font/local";
+import "./globals.css";
+
+const geistSans = localFont({
+  src: "./fonts/GeistVF.woff",
+  variable: "--font-geist-sans",
+  weight: "100 900",
+});
+const geistMono = localFont({
+  src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+
+export const metadata: Metadata = {
+  title: "Create Next App",
+  description: "Generated by create next app",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <SessionProviders>
+        <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </SessionProviders>
+    </html>
+  );
+}
+
+```
+
+6. Add in main page
+```javascript
+   // app/page.tsx
+   import { useSession, signIn, signOut } from "next-auth/react"
+   export default function Component() {
+   const { data: session } = useSession()
+    if(session) {
+      return <>
+        Signed in as {session.user.email} <br/>
+        <button onClick={() => signOut()}>Sign out</button>
+     </>
+    }
+      return <>
+        Not signed in <br/>
+        <button onClick={() => signIn()}>Sign in</button>
+     </>
+    }
+```
+
+7. Test and Deploy
+
+ > Test Locally: Run your Next.js app using npm run dev or yarn dev.
+ > Deploy: When you deploy, update your NEXTAUTH_URL in your environment variables to match your production domain.
+
+ That's it! You've successfully added authentication to your Next.js app with NextAuth.js.
